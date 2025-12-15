@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
@@ -18,6 +19,36 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+<nav>
+  <div>
+    <button></button>
+    <div>
+      <form>
+        <input>
+        <button>Search</button>
+      </form>
+      <ul>        
+          <li>
+            <a>Profile</a>
+          </li>
+          <li>
+            <a>Logout</a>
+          </li>
+          <li>
+            <a>Login</a>
+          </li>
+          <li>
+            <a>Register</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main class="container my-4">
+  {% block content %}{% endblock %}
+</main>
+<footer>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 {% block extra_scripts %}{% endblock %}
 </body>
