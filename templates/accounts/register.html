@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Register | Pass It{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Register</h1>
+
+  <form method="post" class="card p-4 bg-dark border-secondary">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success" type="submit">Create account</button>
+  </form>
+{% endblock %}
