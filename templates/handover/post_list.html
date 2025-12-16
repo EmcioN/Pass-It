@@ -3,14 +3,40 @@
 {% block title %}Handovers | Pass It{% endblock %}
 
 {% block content %}
-  <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="mb-0">Handovers</h1>
-    <a class="btn btn-success" href="#">New handover</a>
-  </div>
+    <a class="btn btn-success" href="{% url 'handover:post_create' %}">New handover</a>
+</div>
+{% if posts %}
+<div class="row row-cols-1 row-cols-md-2 g-3">
+    {% for post in posts %}
+    <div class="col">
+        <div class="card bg-dark border-secondary h-100">
+            <div class="card-body">
+                <h5 class="card-title mb-1">
+                    <a class="link-light text-decoration-none" href="{% url 'handover:post_detail' post.pk %}">
+                        {{ post.title }}
+                    </a>
+                </h5>
 
-  <div class="card bg-dark border-secondary p-3">
-    <p class="mb-0">
-      Post
-    </p>
-  </div>
+                <p class="text-muted small mb-2">
+                    {{ post.team|default:"General" }} · {{ post.get_shift_display }} · For {{ post.date_for }}
+                </p>
+
+                <p class="card-text">
+                    {{ post.body|truncatechars:160 }}
+                </p>
+            </div>
+
+            <div class="card-footer d-flex justify-content-between small text-muted">
+                <span>By {{ post.author.username }}</span>
+                <span>{{ post.get_status_display }}</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">No handovers yet.</p>
+{% endif %}
 {% endblock %}
