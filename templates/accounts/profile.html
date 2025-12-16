@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Profile | Pass It{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">My Profile</h1>
+
+  <div class="card bg-dark border-secondary p-4">
+    <p class="mb-2"><strong>Username:</strong> {{ request.user.username }}</p>
+    <p class="mb-0"><strong>Email:</strong> {{ request.user.email|default:"Not set" }}</p>
+  </div>
+{% endblock %}
