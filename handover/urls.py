@@ -4,5 +4,5 @@ from . import views
 app_name = "handover"
 
 urlpatterns = [
-    
+    path("", views.post_list, name="post_list"),
 ]
