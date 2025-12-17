@@ -5,4 +5,14 @@ from .models import Post
 @login_required
 def post_list(request):
     posts = Post.objects.all()
+
+    q = request.GET.get("q")
+    if q:
+        posts = posts.filter(
+            Q(title__icontains=q) |
+            Q(body__icontains=q) |
+            Q(team__icontains=q) |
+            Q(author__username__icontains=q)
+        )
+
     return render(request, "handover/post_list.html", {"posts": posts})
