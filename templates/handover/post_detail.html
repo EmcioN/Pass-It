@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} | Pass It{% endblock %}
+
+{% block content %}
+  <div class="mb-4">
+    <h1 class="mb-1">{{ post.title }}</h1>
+    <div class="text-muted small">
+      {{ post.team|default:"General" }} · {{ post.get_shift_display }} · For {{ post.date_for }} ·
+      Status: {{ post.get_status_display }}
+      <br>
+      Created {{ post.created_at|date:"Y-m-d H:i" }} by {{ post.author.username }}
+    </div>
+  </div>
+
+  <div class="card bg-dark border-secondary">
+    <div class="card-body">
+      {% if post.image %}
+        <img src="{{ post.image.url }}" class="img-fluid rounded mb-3" alt="Post image">
+      {% endif %}
+      <p style="white-space: pre-wrap;" class="mb-0">{{ post.body }}</p>
+    </div>
+  </div>
+
+  <a class="btn btn-outline-light mt-4" href="{% url 'handover:post_list' %}">Back</a>
+{% endblock %}
