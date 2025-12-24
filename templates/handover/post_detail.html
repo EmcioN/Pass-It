@@ -2,7 +2,7 @@
 {% block title %}{{ post.title }} | Pass It{% endblock %}
 
 {% block content %}
-<div class="mb-4">
+<div class="d-flex justify-content-between align-items-start mb-4">
     <h1 class="mb-1">{{ post.title }}</h1>
     <div class="text-muted small">
         {{ post.team|default:"General" }} · {{ post.get_shift_display }} · For {{ post.date_for }} ·
