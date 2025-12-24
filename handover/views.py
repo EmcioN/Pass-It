@@ -76,3 +76,18 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
 
     return render(request, "handover/post_form.html", {"form": form, "title": "Edit handover"})
+
+@login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if post.author != request.user:
+        messages.error(request, "You are not allowed to delete this handover.")
+        return redirect("handover:post_detail", pk=post.pk)
+
+    if request.method == "POST":
+        post.delete()
+        messages.success(request, "Handover deleted.")
+        return redirect("handover:post_list")
+
+    return render(request, "handover/post_confirm_delete.html", {"post": post})
