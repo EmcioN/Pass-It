@@ -11,7 +11,11 @@
         Created {{ post.created_at|date:"Y-m-d H:i" }} by {{ post.author.username }}
     </div>
 </div>
-
+    {% if user == post.author %}
+      <div class="d-flex gap-2">
+        <a class="btn btn-outline-light btn-sm" href="{% url 'handover:post_edit' post.pk %}">Edit</a>
+      </div>
+    {% endif %}
 <div class="card bg-dark border-secondary">
     <div class="card-body">
         {% if post.image %}
