@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.contrib import messages
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 @login_required
 def post_list(request):
@@ -18,6 +18,21 @@ def post_list(request):
         )
 
     return render(request, "handover/post_list.html", {"posts": posts})
+
+@login_required
+def post_create(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            messages.success(request, "Handover created.")
+            return redirect("handover:post_detail", pk=post.pk)
+    else:
+        form = PostForm()
+
+    return render(request, "handover/post_form.html", {"form": form, "title": "New handover"})
 
 @login_required
 def post_detail(request, pk):
