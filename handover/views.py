@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from .forms import CommentForm
 
 @login_required
 def post_list(request):
@@ -21,4 +22,22 @@ def post_list(request):
 @login_required
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, "handover/post_detail.html", {"post": post})
+    comments = post.comments.select_related("author")
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            messages.success(request, "Comment added.")
+            return redirect("handover:post_detail", pk=post.pk)
+    else:
+        form = CommentForm()
+
+    return render(request, "handover/post_detail.html", {
+        "post": post,
+        "comments": comments,
+        "form": form,
+    })
