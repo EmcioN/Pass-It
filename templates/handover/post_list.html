@@ -5,7 +5,7 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="mb-0">Handovers</h1>
-    <a class="btn btn-success" href="#">New handover</a>
+    <a class="btn btn-success" href="{% url 'handover:post_create' %}">New handover</a>
 </div>
 {% if posts %}
 <div class="row row-cols-1 row-cols-md-2 g-3">
