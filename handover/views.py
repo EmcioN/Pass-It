@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.contrib import messages
 from .forms import CommentForm, PostForm
+from django.db.models import Q
 
 @login_required
 def post_list(request):
@@ -56,3 +57,22 @@ def post_detail(request, pk):
         "comments": comments,
         "form": form,
     })
+
+@login_required
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if post.author != request.user:
+        messages.error(request, "You are not allowed to edit this handover.")
+        return redirect("handover:post_detail", pk=post.pk)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Handover updated.")
+            return redirect("handover:post_detail", pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, "handover/post_form.html", {"form": form, "title": "Edit handover"})
