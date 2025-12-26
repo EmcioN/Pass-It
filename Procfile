@@ -1,1 +1,1 @@
-web: gunicorn pass-it.wsgi
+web: gunicorn passit.wsgi
