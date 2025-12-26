@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile | Pass It{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Edit Profile</h1>
+
+  <form method="post" enctype="multipart/form-data" class="card bg-dark border-secondary p-4">
+    {% csrf_token %}
+
+    <h5 class="mb-3">Account</h5>
+    {{ user_form.as_p }}
+
+    <hr class="border-secondary">
+
+    <h5 class="mb-3">Profile</h5>
+    {{ profile_form.as_p }}
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" type="submit">Save</button>
+      <a class="btn btn-outline-light" href="{% url 'accounts:profile' %}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}
