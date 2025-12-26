@@ -91,3 +91,39 @@ def post_delete(request, pk):
         return redirect("handover:post_list")
 
     return render(request, "handover/post_confirm_delete.html", {"post": post})
+
+@login_required
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if comment.author != request.user:
+        messages.error(request, "You are not allowed to edit this comment.")
+        return redirect("handover:post_detail", pk=comment.post.pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Comment updated.")
+            return redirect("handover:post_detail", pk=comment.post.pk)
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, "handover/comment_form.html", {"form": form, "comment": comment})
+
+
+@login_required
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if comment.author != request.user:
+        messages.error(request, "You are not allowed to delete this comment.")
+        return redirect("handover:post_detail", pk=comment.post.pk)
+
+    if request.method == "POST":
+        post_pk = comment.post.pk
+        comment.delete()
+        messages.success(request, "Comment deleted.")
+        return redirect("handover:post_detail", pk=post_pk)
+
+    return render(request, "handover/comment_confirm_delete.html", {"comment": comment})
