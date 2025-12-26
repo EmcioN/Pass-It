@@ -11,12 +11,12 @@
         Created {{ post.created_at|date:"Y-m-d H:i" }} by {{ post.author.username }}
     </div>
 </div>
-    {% if user == post.author %}
-      <div class="d-flex gap-2">
-        <a class="btn btn-outline-light btn-sm" href="{% url 'handover:post_edit' post.pk %}">Edit</a>
-        <a class="btn btn-outline-danger btn-sm" href="{% url 'handover:post_delete' post.pk %}">Delete</a>
-      </div>
-    {% endif %}
+{% if user == post.author %}
+<div class="d-flex gap-2">
+    <a class="btn btn-outline-light btn-sm" href="{% url 'handover:post_edit' post.pk %}">Edit</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'handover:post_delete' post.pk %}">Delete</a>
+</div>
+{% endif %}
 <div class="card bg-dark border-secondary">
     <div class="card-body">
         {% if post.image %}
@@ -36,6 +36,12 @@
             <strong class="text-light">{{ c.author.username }}</strong>
             · {{ c.created_at|date:"Y-m-d H:i" }}
         </div>
+        {% if user == c.author %}
+        <div class="d-flex gap-2">
+            <a class="btn btn-outline-light btn-sm" href="{% url 'handover:comment_edit' c.pk %}">Edit</a>
+            <a class="btn btn-outline-danger btn-sm" href="{% url 'handover:comment_delete' c.pk %}">Delete</a>
+        </div>
+        {% endif %}
         <p style="white-space: pre-wrap;" class="mb-2">{{ c.body }}</p>
         {% if c.image %}
         <img src="{{ c.image.url }}" class="img-fluid rounded" alt="Comment image">
