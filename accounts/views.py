@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 def register(request):
     if request.method == "POST":
@@ -17,11 +18,8 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request,"accounts/profile.html")
-
-@login_required
-def profile(request):
-    return render(request, "accounts/profile.html", {"profile": request.user.profile})
+    profile_obj, _ = Profile.objects.get_or_create(user=request.user)
+    return render(request, "accounts/profile.html", {"profile": profile_obj})
 
 
 @login_required
