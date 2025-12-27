@@ -8,7 +8,10 @@
         {{ post.team|default:"General" }} · {{ post.get_shift_display }} · For {{ post.date_for }} ·
         Status: {{ post.get_status_display }}
         <br>
-        Created {{ post.created_at|date:"Y-m-d H:i" }} by {{ post.author.username }}
+        Created {{ post.created_at|date:"Y-m-d H:i" }} by <a class="text-decoration-none link-light"
+            href="{% url 'accounts:profile_view' post.author.username %}">
+            {{ post.author.username }}
+        </a>
     </div>
 </div>
 {% if user == post.author %}
@@ -46,7 +49,11 @@
 <div class="card bg-dark border-secondary mb-2">
     <div class="card-body">
         <div class="small text-muted mb-2">
-            <strong class="text-light">{{ c.author.username }}</strong>
+            <strong>
+                <a class="text-decoration-none link-light" href="{% url 'accounts:profile_view' c.author.username %}">
+                    {{ c.author.username }}
+                </a>
+            </strong>
             · {{ c.created_at|date:"Y-m-d H:i" }}
         </div>
         {% if user == c.author %}

@@ -7,6 +7,7 @@
     height: 7rem;
 }
 
+
 .avatar-lg {
   width: 120px;
   height: 120px;
@@ -40,4 +41,12 @@
   .btn-sm-full {
     width: 100%;
   }
+}
+
+.post-card {
+    cursor: pointer;
+}
+
+.post-card:hover {
+    border-color: rgba(255, 255, 255, .35);
 }

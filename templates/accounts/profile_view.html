@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}{{ profile_user.username }} | Profile{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">{{ profile_user.username }}'s Profile</h1>
+
+    {% if request.user.is_authenticated and request.user == profile_user %}
+      <a class="btn btn-outline-light" href="{% url 'accounts:profile_edit' %}">Edit profile</a>
+    {% endif %}
+  </div>
+
+  <div class="card bg-dark border-secondary p-4">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      {% if profile.image %}
+        <img src="{{ profile.image.url }}" alt="Profile picture" class="rounded-circle avatar-lg profilesize">
+      {% else %}
+        <div class="rounded-circle bg-secondary profilesize"></div>
+      {% endif %}
+
+      <div>
+        <h4 class="mb-1">{{ profile_user.username }}</h4>
+        <div class="text-muted small">
+          {{ profile_user.first_name }} {{ profile_user.last_name }}
+          {% if profile_user.email and request.user == profile_user %} · {{ profile_user.email }}{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <p class="mb-3" style="white-space: pre-wrap;">
+      {{ profile.bio|default:"No bio yet." }}
+    </p>
+
+    <div class="row g-2">
+      <div class="col-md-6">
+        <div class="p-3 border border-secondary rounded">
+          <div class="text-muted small">Phone</div>
+          <div>{{ profile.phone|default:"Not set" }}</div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="p-3 border border-secondary rounded">
+          <div class="text-muted small">Website</div>
+          {% if profile.website %}
+            <a class="link-light" href="{{ profile.website }}" target="_blank" rel="noopener">Open</a>
+          {% else %}
+            <div>Not set</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="p-3 border border-secondary rounded">
+          <div class="text-muted small">LinkedIn</div>
+          {% if profile.linkedin %}
+            <a class="link-light" href="{{ profile.linkedin }}" target="_blank" rel="noopener">Open</a>
+          {% else %}
+            <div>Not set</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="p-3 border border-secondary rounded">
+          <div class="text-muted small">Instagram</div>
+          {% if profile.instagram %}
+            <a class="link-light" href="{{ profile.instagram }}" target="_blank" rel="noopener">Open</a>
+          {% else %}
+            <div>Not set</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="p-3 border border-secondary rounded">
+          <div class="text-muted small">Facebook</div>
+          {% if profile.facebook %}
+            <a class="link-light" href="{{ profile.facebook }}" target="_blank" rel="noopener">Open</a>
+          {% else %}
+            <div>Not set</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
