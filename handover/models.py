@@ -35,6 +35,17 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title} ({self.date_for})"
 
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
+    image = CloudinaryField("image")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return f"Image for post {self.post_id}"
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(User, on_delete=models.CASCADE)

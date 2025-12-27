@@ -10,7 +10,7 @@
   <div class="card bg-dark border-secondary p-4">
     <div class="d-flex align-items-center gap-3 mb-3">
       {% if profile.image %}
-        <img src="{{ profile.image.url }}" alt="Profile picture" class="rounded-circle avatar-lg" width="90" height="90">
+        <img src="{{ profile.image.url }}" alt="Profile picture" class="rounded-circle avatar-lg profilesize">
       {% else %}
         <div class="rounded-circle bg-secondary profilesize"></div>
       {% endif %}
