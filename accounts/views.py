@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Profile
 
 def register(request):
@@ -43,3 +44,7 @@ def profile_edit(request):
         "user_form": user_form,
         "profile_form": profile_form,
     })
+
+def profile_view(request, username):
+    user_obj = get_object_or_404(User, username=username)
+    return render(request, "accounts/profile_view.html", {"profile_user": user_obj})
