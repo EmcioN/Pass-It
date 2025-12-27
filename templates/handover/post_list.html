@@ -3,24 +3,42 @@
 {% block title %}Handovers | Pass It{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
     <h1 class="mb-0">Handovers</h1>
-    <a class="btn btn-success" href="{% url 'handover:post_create' %}">New handover</a>
+    <a class="btn btn-success btn-sm-full" href="{% url 'handover:post_create' %}">
+        New handover
+    </a>
 </div>
+
 {% if posts %}
 <div class="row row-cols-1 row-cols-md-2 g-3">
     {% for post in posts %}
     <div class="col">
-        <div class="card bg-dark border-secondary h-100">
+        <div class="card bg-dark border-secondary h-100">            
+            {% with first_extra=post.images.first %}
+                {% if post.image %}
+                    <div class="media-tile border-bottom border-secondary">
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    </div>
+                {% elif first_extra %}
+                    <div class="media-tile border-bottom border-secondary">
+                        <img src="{{ first_extra.image.url }}" alt="{{ post.title }}">
+                    </div>
+                {% endif %}
+            {% endwith %}
+
             <div class="card-body">
-                <h5 class="card-title mb-1">
-                    <a class="link-light text-decoration-none" href="{% url 'handover:post_detail' post.pk %}">
+                <h5 class="card-title mb-1 post-title">
+                    <a class="link-light text-decoration-none"
+                       href="{% url 'handover:post_detail' post.pk %}">
                         {{ post.title }}
                     </a>
                 </h5>
 
                 <p class="text-muted small mb-2">
-                    {{ post.team|default:"General" }} · {{ post.get_shift_display }} · For {{ post.date_for }}
+                    {{ post.team|default:"General" }}
+                    · {{ post.get_shift_display }}
+                    · For {{ post.date_for }}
                 </p>
 
                 <p class="card-text">
