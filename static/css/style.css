@@ -6,3 +6,38 @@
     width: 7rem;
     height: 7rem;
 }
+
+.avatar-lg {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.media-tile {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: .5rem;
+}
+
+.media-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-title {
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+@media (max-width: 576px) {
+  .stack-sm {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .btn-sm-full {
+    width: 100%;
+  }
+}

@@ -14,47 +14,62 @@
 <div class="row row-cols-1 row-cols-md-2 g-3">
     {% for post in posts %}
     <div class="col">
-        <div class="card bg-dark border-secondary h-100">            
-            {% with first_extra=post.images.first %}
+
+        <a href="{% url 'handover:post_detail' post.pk %}" class="text-decoration-none text-reset d-block h-100">
+
+            <div class="card bg-dark border-secondary h-100 post-card">
+
+                {% with first_extra=post.images.first %}
                 {% if post.image %}
-                    <div class="media-tile border-bottom border-secondary">
-                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
-                    </div>
+                <div class="media-tile border-bottom border-secondary">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                </div>
                 {% elif first_extra %}
-                    <div class="media-tile border-bottom border-secondary">
-                        <img src="{{ first_extra.image.url }}" alt="{{ post.title }}">
-                    </div>
+                <div class="media-tile border-bottom border-secondary">
+                    <img src="{{ first_extra.image.url }}" alt="{{ post.title }}">
+                </div>
                 {% endif %}
-            {% endwith %}
+                {% endwith %}
 
-            <div class="card-body">
-                <h5 class="card-title mb-1 post-title">
-                    <a class="link-light text-decoration-none"
-                       href="{% url 'handover:post_detail' post.pk %}">
+                <div class="card-body">
+                    <h5 class="card-title mb-1 post-title link-light">
                         {{ post.title }}
-                    </a>
-                </h5>
+                    </h5>
 
-                <p class="text-muted small mb-2">
-                    {{ post.team|default:"General" }}
-                    · {{ post.get_shift_display }}
-                    · For {{ post.date_for }}
-                </p>
+                    <p class="text-muted small mb-2">
+                        {{ post.team|default:"General" }}
+                        · {{ post.get_shift_display }}
+                        · For {{ post.date_for }}
+                    </p>
 
-                <p class="card-text">
-                    {{ post.body|truncatechars:160 }}
-                </p>
+                    <p class="card-text">
+                        {{ post.body|truncatechars:160 }}
+                    </p>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between small text-muted">
+                    <span>By {{ post.author.username }}</span>
+                    <span>{{ post.get_status_display }}</span>
+                </div>
             </div>
 
-            <div class="card-footer d-flex justify-content-between small text-muted">
-                <span>By {{ post.author.username }}</span>
-                <span>{{ post.get_status_display }}</span>
-            </div>
-        </div>
+        </a>
     </div>
     {% endfor %}
 </div>
 {% else %}
 <p class="text-muted">No handovers yet.</p>
 {% endif %}
+
+{# Optional: hover effect #}
+<style>
+    .post-card {
+        cursor: pointer;
+    }
+
+    .post-card:hover {
+        border-color: rgba(255, 255, 255, .35);
+    }
+</style>
+
 {% endblock %}
