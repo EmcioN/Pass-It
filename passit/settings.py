@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'handover',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [

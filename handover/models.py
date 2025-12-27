@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 class Post(models.Model):
@@ -24,7 +25,7 @@ class Post(models.Model):
     date_for = models.DateField(help_text="Date this handover is for")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="OPEN")
 
-    image = models.ImageField(upload_to="posts/", blank=True, null=True)
+    image = CloudinaryField("image", blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -38,7 +39,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
-    image = models.ImageField(upload_to="comments/", blank=True, null=True)
+    image = CloudinaryField("image", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
