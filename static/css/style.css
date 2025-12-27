@@ -1,0 +1,8 @@
+* {        
+    box-sizing: border-box;         
+}
+
+.profilesize{
+    width: 3rem;
+    height: 3rem;
+}
