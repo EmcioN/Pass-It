@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment
+from .models import Post, Comment, PostImage
 from django.contrib import messages
 from .forms import CommentForm, PostForm
 from django.db.models import Q
@@ -28,6 +28,8 @@ def post_create(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            for f in request.FILES.getlist("images"):
+                PostImage.objects.create(post=post, image=f)
             messages.success(request, "Handover created.")
             return redirect("handover:post_detail", pk=post.pk)
     else:
@@ -70,6 +72,8 @@ def post_edit(request, pk):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
+            for f in request.FILES.getlist("images"):
+                PostImage.objects.create(post=post, image=f)
             messages.success(request, "Handover updated.")
             return redirect("handover:post_detail", pk=post.pk)
     else:
