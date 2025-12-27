@@ -24,7 +24,9 @@
     <div class="card-body">
         {% if post.image %}
         <div class="media-tile border border-secondary mb-3">
-            <img src="{{ post.image.url }}" alt="Post image">
+            <a href="{{ post.image.url }}" target="_blank" rel="noopener">
+                <img src="{{ post.image.url }}" alt="Post image">
+            </a>
         </div>
         {% endif %}
         {% if post.images.all %}
@@ -32,7 +34,9 @@
             {% for img in post.images.all %}
             <div class="col-6 col-md-4">
                 <div class="media-tile border border-secondary">
-                    <img src="{{ img.image.url }}" alt="Post image">
+                    <a href="{{ img.image.url }}" target="_blank" rel="noopener">
+                        <img src="{{ img.image.url }}" alt="Post image">
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -64,7 +68,9 @@
         {% endif %}
         <p style="white-space: pre-wrap;" class="mb-2">{{ c.body }}</p>
         {% if c.image %}
-        <img src="{{ c.image.url }}" class="img-fluid rounded" alt="Comment image">
+        <a href="{{ c.image.url }}" target="_blank" rel="noopener">
+            <img src="{{ c.image.url }}" class="img-fluid rounded" alt="Comment image">
+        </a>
         {% endif %}
     </div>
 </div>
