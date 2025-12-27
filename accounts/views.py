@@ -24,9 +24,11 @@ def profile(request):
 
 @login_required
 def profile_edit(request):
+    profile_obj, _ = Profile.objects.get_or_create(user=request.user)
+
     if request.method == "POST":
         user_form = UserEditForm(request.POST, instance=request.user)
-        profile_form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = ProfileEditForm(request.POST, request.FILES, instance=profile_obj)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -35,7 +37,7 @@ def profile_edit(request):
             return redirect("accounts:profile")
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+        profile_form = ProfileEditForm(instance=profile_obj)
 
     return render(request, "accounts/profile_edit.html", {
         "user_form": user_form,
