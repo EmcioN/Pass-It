@@ -108,3 +108,125 @@ All defined user stories for the Pass-It project have been successfully fulfille
 | As a user, I can comment on handovers                                               | Comment creation and deletion tested       |
 | As a user, I can manage my profile                                                  | Profile edit and image upload tested       |
 | As a non-authenticated user, I am restricted from protected pages                   | Access control tested                      |
+
+## Html Validation
+
+### Login Page
+
+![List](/doc/img/loginv.png)
+
+### Register Page
+
+![List](/doc/img/registerv.png)
+
+### Profile Page
+
+![List](/doc/img/profilev.png)
+
+### Profile Edit Page
+
+![List](/doc/img/profileeditv.png)
+
+### Profile view Page
+
+![List](/doc/img/userprofilev.png)
+
+### Handover list Page
+
+![List](/doc/img/basev.png)
+
+### New Handover Page
+
+![List](/doc/img/newpostv.png)
+
+### Handover Details Page
+
+![List](/doc/img/postdetailv.png)
+
+### Handover edit Page 
+
+![List](/doc/img/posteditv.png)
+
+### Handover Delete Page
+
+![List](/doc/img/postdeletev.png)
+
+### P404 Page
+
+![List](/doc/img/p404v.png)
+
+## CSS Validation 
+
+![List](/doc/img/cssv.png)
+
+## Python Validation
+
+### Account
+
+### __init__.py
+
+![List](/doc/img/initp.png)
+
+### apps.py
+
+![List](/doc/img/appsp.png)
+
+### forms.py
+
+![List](/doc/img/formsap.png)
+
+### models.py
+
+![List](/doc/img/modelsap.png)
+
+### urls.py
+
+![List](/doc/img/urlsap.png)
+
+### view.py
+
+![List](/doc/img/viewap.png)
+
+### Handover 
+
+### admin.py
+
+![List](/doc/img/adminhp.png)
+
+### apps.py
+
+![List](/doc/img/appshp.png)
+
+### froms.py
+
+![List](/doc/img/formshp.png)
+
+### models.py
+
+![List](/doc/img/modelshp.png)
+
+### urls.py
+
+![List](/doc/img/urlshp.png)
+
+### view.py
+
+![List](/doc/img/viewshp.png)
+
+### Passit
+
+### asgi.py
+
+![List](/doc/img/asgip.png)
+
+### settings.py
+
+![List](/doc/img/settingsp.png)
+
+### urls.py
+
+![List](/doc/img/urlsp.png)
+
+### wsgip.py
+
+![List](/doc/img/wsgip.png)
