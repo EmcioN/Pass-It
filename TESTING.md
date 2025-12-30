@@ -230,3 +230,46 @@ All defined user stories for the Pass-It project have been successfully fulfille
 ### wsgip.py
 
 ![List](/doc/img/wsgip.png)
+
+## Manual Testing and Fixes
+
+Manual testing was carried out regularly during the development of the Pass-It project. Testing was done after adding new features, fixing bugs, and before and after deployment. Many small issues were found during development, but all were fixed through testing and retesting.
+
+### Development Issues Found and Fixed
+
+- Whitespace and indentation problems
+Some Python errors happened because of incorrect spacing or indentation, especially after moving or rewriting code. These errors caused the app to crash or not load pages correctly. The issues were fixed by correcting indentation and checking the structure of the code.
+
+- Missing or forgotten imports
+Some views did not work because required imports were missing. Django error messages helped identify which imports were forgotten. Once the correct imports were added, the pages worked as expected.
+
+- Spelling mistakes and wrong names
+Several bugs were caused by small spelling mistakes in variable names, URLs, or template files. This caused pages not to load or data not to display correctly. These issues were fixed by correcting the spelling and making sure names matched across files.
+
+- Forgot to install Pillow
+Image uploads failed at first because the Pillow library was not installed. This was discovered during testing of the image upload feature. The issue was fixed by installing Pillow and adding it to the requirements.txt file.
+
+- Code placed in the wrong location
+Some logic was placed in the wrong files, such as code being written in templates instead of views. This caused confusing behaviour and made debugging harder. The code was moved to the correct files to follow Django best practices.
+
+### Form and Input Testing
+
+- Some forms allowed empty or invalid input during early testing.
+
+- Whitespace-only input caused issues with required fields.
+
+- Error messages were not always shown clearly.
+
+These issues were fixed by improving form validation and making sure clear error messages were shown to the user when input was incorrect.
+
+### Deployment Testing Issues
+
+- Some settings worked locally but failed on Heroku due to missing environment variables.
+
+- Debug mode was initially left on and later turned off for production.
+
+- Media and image handling needed extra configuration after deployment.
+
+- Each issue was fixed by updating configuration settings and retesting the live site to confirm everything worked correctly.
+
+### Debug mode was enabled during local development and correctly disabled in the production environment to improve security.
