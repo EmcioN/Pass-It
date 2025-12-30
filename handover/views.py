@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import CommentForm, PostForm
 from django.db.models import Q
 
+
 @login_required
 def post_list(request):
     posts = Post.objects.all()
@@ -19,6 +20,7 @@ def post_list(request):
         )
 
     return render(request, "handover/post_list.html", {"posts": posts})
+
 
 @login_required
 def post_create(request):
@@ -36,6 +38,7 @@ def post_create(request):
         form = PostForm()
 
     return render(request, "handover/post_form.html", {"form": form, "title": "New handover"})
+
 
 @login_required
 def post_detail(request, pk):
@@ -60,6 +63,7 @@ def post_detail(request, pk):
         "form": form,
     })
 
+
 @login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -81,6 +85,7 @@ def post_edit(request, pk):
 
     return render(request, "handover/post_form.html", {"form": form, "title": "Edit handover"})
 
+
 @login_required
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -95,6 +100,7 @@ def post_delete(request, pk):
         return redirect("handover:post_list")
 
     return render(request, "handover/post_confirm_delete.html", {"post": post})
+
 
 @login_required
 def comment_edit(request, pk):

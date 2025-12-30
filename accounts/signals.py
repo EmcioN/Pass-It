@@ -11,6 +11,6 @@ from .models import Profile
 
 
 @receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):    
+def save_profile(sender, instance, **kwargs):
     if hasattr(instance, "profile"):
         instance.profile.save()

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Profile
 
+
 def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
@@ -16,6 +17,7 @@ def register(request):
         form = UserRegistrationForm()
 
     return render(request, "accounts/register.html", {"form": form})
+
 
 @login_required
 def profile(request):
@@ -44,6 +46,7 @@ def profile_edit(request):
         "user_form": user_form,
         "profile_form": profile_form,
     })
+
 
 def profile_view(request, username):
     user_obj = get_object_or_404(User, username=username)

@@ -29,11 +29,13 @@ class Post(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
         ordering = ["-date_for", "-created_at"]
 
     def __str__(self):
         return f"{self.title} ({self.date_for})"
+
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
@@ -45,6 +47,7 @@ class PostImage(models.Model):
 
     def __str__(self):
         return f"Image for post {self.post_id}"
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
